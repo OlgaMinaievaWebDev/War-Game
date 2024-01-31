@@ -1,0 +1,42 @@
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: "Exo 2", sans-serif;
+}
+
+.container {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ width: 100vw;
+ height: 100vh;
+ background-image: url('./table.jpeg');
+ background-position: top;
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+
+.shuffle, .draw {
+ padding: 0.5em 1em;
+ background-color: #F1C93B;
+ font-size: 1rem;
+ font-weight: 900;
+ border: none;
+ border-radius: 0.5em;
+ margin-top: 0.3em;
+ cursor: pointer;
+}
+
+.shuffle{
+align-self: start;
+}
+
+.shuffle:active{
+ transform: translateY(2px);
+}
+
+.draw {
+font-size: 1.2em;
+border-radius: 0;
+}
