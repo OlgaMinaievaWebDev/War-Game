@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Exo 2", sans-serif;
+  color: white;
 }
 
 .container {
@@ -17,10 +18,18 @@
   background-size: cover;
 }
 
-.header {
- text-align: center;
- color: white;
+.header,
+#remaining,
+h3 {
+  text-align: center;
+}
 
+.top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+  gap: 2em;
 }
 
 .shuffle,
@@ -32,6 +41,7 @@
   border: none;
   border-radius: 0.5em;
   margin-top: 0.3em;
+  color: #000;
   cursor: pointer;
 }
 
@@ -56,3 +66,6 @@
   margin: 0 auto;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}

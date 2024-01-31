@@ -1,27 +1,48 @@
 let deckId;
+let playerScore = 0;
+let computerScore = 0;
 const winnerTextEl = document.getElementById("winner-text");
+const drawBtn = document.getElementById("draw-card");
 
-function getNewDeck() {
-  fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
-    .then((res) => res.json())
-    .then((data) => {
-      deckId = data.deck_id;
-    });
+async function getNewDeck() {
+  const res = await fetch(
+    "https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/"
+  );
+  const data = await res.json();
+  document.getElementById(
+    "remaining"
+  ).textContent = `Remaining cards: ${data.remaining}`;
+  deckId = data.deck_id;
+  console.log(data.id);
 }
 
 document.getElementById("new-deck").addEventListener("click", getNewDeck);
 
-document.getElementById("draw-card").addEventListener("click", function () {
-  fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
-    .then((res) => res.json())
-    .then((data) => {
-      document.getElementById("cards").innerHTML = `
+drawBtn.addEventListener("click", async function () {
+  const res = await fetch(
+    `https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`
+  );
+  const data = await res.json();
+  document.getElementById(
+    "remaining"
+  ).textContent = `Remaining cards: ${data.remaining}`;
+  document.getElementById("cards").innerHTML = `
        <img src=${data.cards[0].image} />
        <img src=${data.cards[1].image} />
    `;
-      const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
-      winnerTextEl.textContent = winnerText;
-    });
+  const winnerText = determineCardWinner(data.cards[0], data.cards[1]);
+  //winnerTextEl.textContent = winnerText;
+
+  if (data.remaining === 0) {
+    drawBtn.disabled = true;
+    if (playerScore > computerScore) {
+      winnerTextEl.textContent = "You won!";
+    } else if (computerScore > playerScore) {
+      winnerTextEl.textContent = "Computer won!";
+    } else {
+      winnerTextEl.textContent = "War!";
+    }
+  }
 });
 
 function determineCardWinner(card1, card2) {
@@ -45,9 +66,15 @@ function determineCardWinner(card1, card2) {
   const card2ValueIndex = valueOptions.indexOf(card2.value);
 
   if (card1ValueIndex > card2ValueIndex) {
-    return "Card 1 wins!";
+    computerScore++;
+    document.getElementById(
+      "computer"
+    ).textContent = `Computer score: ${computerScore}`;
+    return "Computer wins!";
   } else if (card1ValueIndex < card2ValueIndex) {
-    return "Card 2 wins!";
+    playerScore++;
+    document.getElementById("player").textContent = `My score: ${playerScore}`;
+    return "You win!";
   } else {
     return "War!";
   }

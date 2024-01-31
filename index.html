@@ -3,15 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>War</title>
   </head>
   <body>
     <div class="container">
-      <button id="new-deck" class="shuffle">New Deck</button>
+      <div class="top">
+        <button id="new-deck" class="shuffle">New Deck</button>
+        <p id="remaining"></p>
+      </div>
       <h1 id="winner-text" class="header">Game of War</h1>
+      <h3 id="computer">Computer score: 0</h3>
       <div id="cards" class="cards"></div>
+      <h3 id="player">My score: 0</h3>
       <button id="draw-card" class="draw">Draw Card</button>
     </div>
     <script src="app.js"></script>
